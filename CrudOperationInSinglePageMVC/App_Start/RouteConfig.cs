@@ -16,7 +16,7 @@ namespace CrudOperationInSinglePageMVC
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
+                defaults: new { controller = "Home", action = "CreateUpdateEmployee", id = UrlParameter.Optional }
             );
         }
     }

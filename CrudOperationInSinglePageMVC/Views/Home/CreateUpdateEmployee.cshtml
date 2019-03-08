@@ -1,0 +1,98 @@
+﻿@model CrudOperationInSinglePageMVC.Models.EmployeeDTO
+
+@{
+    ViewBag.Title = "CreateUpdateEmployee";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+<br />
+<br />
+<br />
+<h2>Asp.net MVC CRUD Operation in single page</h2>
+
+<hr />
+<div class="row">
+    <div class="col-md-9">
+        <table class="table ">
+            <tr style="font-weight:900;">
+                <td>Name</td>
+                <td>Position</td>
+                <td>Office</td>
+                <td>Age</td>
+                <td>Salary</td>
+                <td></td>
+            </tr>
+            @foreach (var item in Model.EmployeeList)
+            {
+                <tr>
+                    <td>@item.Name</td>
+                    <td>@item.Position</td>
+                    <td>@item.Office</td>
+                    <td>@item.Age</td>
+                    <td>@item.Salary</td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.EmployeeID }, new { @class = "btn btn-primary" })
+
+                        @Html.ActionLink("Delete", "Delete", new { id = item.EmployeeID }, new { @class = "btn btn-danger" })
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+
+    <div class="col-md-3">
+        @using (Html.BeginForm("CreateUpdateEmployee", "Home"))
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-horizontal">
+
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    @Html.LabelFor(model => model.EmployeeData.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-8">
+                        @Html.EditorFor(model => model.EmployeeData.Name, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.EmployeeData.Name, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.EmployeeData.Position, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-8">
+                        @Html.EditorFor(model => model.EmployeeData.Position, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.EmployeeData.Position, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.EmployeeData.Office, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-8">
+                        @Html.EditorFor(model => model.EmployeeData.Office, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.EmployeeData.Office, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.EmployeeData.Age, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-8">
+                        @Html.EditorFor(model => model.EmployeeData.Age, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.EmployeeData.Age, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.EmployeeData.Salary, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-8">
+                        @Html.EditorFor(model => model.EmployeeData.Salary, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.EmployeeData.Salary, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                @Html.HiddenFor(model => model.EmployeeData.EmployeeID)
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-8">
+                        <input type="submit" value="Save and Create" class="btn btn-success" />
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
